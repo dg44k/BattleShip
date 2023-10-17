@@ -1,19 +1,29 @@
 import GameBoard from "../scripts/GameBoard";
 import * as constants from "../scripts/constants";
 
-const obj = new GameBoard();
+let board = [];
+let obj;
+beforeAll(() => {
+
+    obj = new GameBoard();
+    board = obj.createBoard();
+    obj.randomArrangementShips();
+});
+
 test('Проверка на наличие 100 клеток', () => {
-    expect(obj.createBoard().reduce((acc, elem) => {
+    expect(board.reduce((acc, elem) => {
         return acc + elem.length;
     }, 0)).toBe(100);
 });
-// test('Проверка на попадание атаки в корабль', () => {
-//     expect().toBe(true);
-// });
-// test('Проверка на промах атаки в корабль', () => {
-//     expect().toBe(false);
-// });
-//
-// test('Проверка того, что все корабли уничтожены', () => {
-//     expect().toBe(true);
-// });
+test('Проверка на попадание атаки в корабль', () => {
+
+    expect(obj.receiveAttack(1, 2)).toBe(true);
+});
+test('Проверка на промах атаки в корабль', () => {
+
+    expect(obj.receiveAttack(1, 6)).toBe(false);
+});
+
+test('Проверка того, что все корабли уничтожены', () => {
+    expect().toBe(true);
+});

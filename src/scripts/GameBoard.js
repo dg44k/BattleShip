@@ -4,10 +4,10 @@ import Ship from "./Ship";
 
 
 const GameBoard = function () {
-    let show_board = false;
     let board = [];
     let axisX = true;
     let axisY = false;
+    let ships = [];
 
     const createBoard = function () {
         for (let i = 0; i < 10; i++) {
@@ -20,28 +20,55 @@ const GameBoard = function () {
     }
     const randomArrangementShips = function () {
         const four_deck = new Ship(4);
-        cycleArrangement(four_deck.getLengthShip());
+        cycleArrangement(four_deck);
+        ships.push(four_deck);
         const triple_deck_1 = new Ship(3);
-        cycleArrangement(triple_deck_1.getLengthShip());
+        cycleArrangement(triple_deck_1);
+        ships.push(triple_deck_1);
         const triple_deck_2 = new Ship(3);
-        cycleArrangement(triple_deck_2.getLengthShip());
+        cycleArrangement(triple_deck_2);
+        ships.push(triple_deck_2);
         const dual_deck_1 = new Ship(2);
-        cycleArrangement(dual_deck_1.getLengthShip());
+        cycleArrangement(dual_deck_1);
+        ships.push(dual_deck_1);
         const dual_deck_2 = new Ship(2);
-        cycleArrangement(dual_deck_2.getLengthShip());
+        cycleArrangement(dual_deck_2);
+        ships.push(dual_deck_2);
         const dual_deck_3 = new Ship(2);
-        cycleArrangement(dual_deck_3.getLengthShip());
+        cycleArrangement(dual_deck_3);
+        ships.push(dual_deck_3);
         const single_deck_1 = new Ship(1);
-        cycleArrangement(single_deck_1.getLengthShip());
+        cycleArrangement(single_deck_1);
+        ships.push(single_deck_1);
         const single_deck_2 = new Ship(1);
-        cycleArrangement(single_deck_2.getLengthShip());
+        cycleArrangement(single_deck_2);
+        ships.push(single_deck_2);
         const single_deck_3 = new Ship(1);
-        cycleArrangement(single_deck_3.getLengthShip());
+        cycleArrangement(single_deck_3);
+        ships.push(single_deck_3);
         const single_deck_4 = new Ship(1);
-        cycleArrangement(single_deck_4.getLengthShip());
-        console.log(board)
+        cycleArrangement(single_deck_4);
+        ships.push(single_deck_4);
+
     }
-    const getRandomCoordinates = function (ship_length) {
+    const cycleArrangement = function (ship) {
+        const [coordX, coordY] = getRandomCoordinates(ship);
+        ship.setPointStart([coordX, coordY]);
+
+        if (axisX === false) {
+            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
+                board[i][coordY] = constants.WHOLE_SHIP;
+            }
+            ship.setPointEnd([coordX + ship.getLengthShip() - 1, coordY]);
+        } else {
+            for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
+                board[coordX][i] = constants.WHOLE_SHIP;
+            }
+            ship.setPointEnd([coordX, coordY + ship.getLengthShip() - 1]);
+        }
+        setStopZone(ship.getLengthShip(), coordX, coordY, axisX, board)
+    }
+    const getRandomCoordinates = function (ship) {
         let coordinateX;
         let coordinateY;
         let check_nearby_ship = false;
@@ -49,21 +76,21 @@ const GameBoard = function () {
             coordinateX = Math.floor(Math.random()*9);
             coordinateY = Math.floor(Math.random()*9);
             if(Math.floor(Math.random()) === 0) toggleAxis();
-            check_nearby_ship = checkShipNearby(ship_length, coordinateX, coordinateY)
+            check_nearby_ship = checkShipNearby(ship, coordinateX, coordinateY)
         }
         return [coordinateX, coordinateY];
     }
-    const checkShipNearby = function (ship_length, coordX, coordY) {
+    const checkShipNearby = function (ship, coordX, coordY) {
         if (axisX === false) {
-            if (coordX + ship_length > 9) return false;
-            for (let i = coordX; i < coordX + ship_length; i++) {
+            if (coordX + ship.getLengthShip() > 9) return false;
+            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
                 if(board[i][coordY] !== constants.WHOLE_SHIP &&
                    board[i][coordY] !== constants.STOP_ZONE) continue;
                 else return false;
             }
         } else {
-            if (coordY + ship_length > 9) return false;
-            for (let i = coordY; i < coordY + ship_length; i++) {
+            if (coordY + ship.getLengthShip() > 9) return false;
+            for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
                 if(board[coordX][i] !== constants.WHOLE_SHIP &&
                     board[coordX][i] !== constants.STOP_ZONE) continue;
                 else return false;
@@ -71,19 +98,36 @@ const GameBoard = function () {
         }
         return true;
     }
-    const cycleArrangement = function (ship_length) {
-        const [coordX, coordY] = getRandomCoordinates(ship_length);
+    const receiveAttack = function (coordX, coordY) {
+        if (board[coordX][coordY] === constants.WHOLE_SHIP) {
+            for (let i = 0; i < 10; i++) {
+                if (axisX === false) {
+                    if (coordX === ships[i].getPointStart()[0]) {
+                        if (coordY >= ships[i].getPointStart()[1] && coordY <= ships[i].getPointEnd()[1]){
+                            ships[i].hit();
+                            return true;
+                        }
+                    }
+                } else {
+                    if (coordY === ships[i].getPointStart()[1]) {
+                        if (coordX >= ships[i].getPointStart()[0] && coordX <= ships[i].getPointEnd()[0]){
+                            ships[i].hit();
+                            return true;
+                        }
+                    }
+                }
 
-        if (axisX === false) {
-            for (let i = coordX; i < coordX + ship_length; i++) {
-                board[i][coordY] = constants.WHOLE_SHIP;
             }
-        } else {
-            for (let i = coordY; i < coordY + ship_length; i++) {
-                board[coordX][i] = constants.WHOLE_SHIP;
-            }
+
+            board[coordX][coordY] = constants.WRECKED_SHIP;
+
         }
-        setStopZone(ship_length, coordX, coordY, axisX, board)
+        else if (board[coordX][coordY] === constants.EMPTY ||
+            board[coordX][coordY] === constants.STOP_ZONE) {
+            board[coordX][coordY] = constants.MISS;
+            return false;
+        }
+
     }
     function toggleAxis() {
         if (axisX === true){
@@ -95,18 +139,14 @@ const GameBoard = function () {
         }
     }
 
-    const receiveAttack = function (coordX, coordY) {
-        
-    }
-
     return {
-        board,
         cycleArrangement,
         getRandomCoordinates,
         createBoard,
         checkShipNearby,
         toggleAxis,
         randomArrangementShips,
+        receiveAttack
     }
 }
 
