@@ -118,16 +118,13 @@ const GameBoard = function () {
                 }
 
             }
-
             board[coordX][coordY] = constants.WRECKED_SHIP;
-
         }
         else if (board[coordX][coordY] === constants.EMPTY ||
             board[coordX][coordY] === constants.STOP_ZONE) {
             board[coordX][coordY] = constants.MISS;
             return false;
         }
-
     }
     function toggleAxis() {
         if (axisX === true){
@@ -138,6 +135,14 @@ const GameBoard = function () {
             axisY = false;
         }
     }
+    function checkAllShips() {
+        for (let i = 0; i < ships.length; i++) {
+            if(ships[i].getLifeShip() !== true) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     return {
         cycleArrangement,
@@ -146,7 +151,8 @@ const GameBoard = function () {
         checkShipNearby,
         toggleAxis,
         randomArrangementShips,
-        receiveAttack
+        receiveAttack,
+        checkAllShips
     }
 }
 

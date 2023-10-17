@@ -16,14 +16,12 @@ test('Проверка на наличие 100 клеток', () => {
     }, 0)).toBe(100);
 });
 test('Проверка на попадание атаки в корабль', () => {
-
     expect(obj.receiveAttack(1, 2)).toBe(true);
 });
 test('Проверка на промах атаки в корабль', () => {
-
     expect(obj.receiveAttack(1, 6)).toBe(false);
 });
 
 test('Проверка того, что все корабли уничтожены', () => {
-    expect().toBe(true);
+    expect(obj.checkAllShips()).toBe(true);
 });

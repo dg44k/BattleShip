@@ -8,9 +8,6 @@ const Ship = function(length) {
     function getLengthShip() {
         return length_ship;
     }
-    function getCountHit() {
-        return count_hit;
-    }
     function getLifeShip() {
         return life_ship;
     }
@@ -38,7 +35,6 @@ const Ship = function(length) {
     return {
         getLifeShip,
         getLengthShip,
-        getCountHit,
         isSunk,
         hit,
         getPointStart,
