@@ -49,7 +49,6 @@ const GameBoard = function () {
         const single_deck_4 = new Ship(1);
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
-
     }
     const cycleArrangement = function (ship) {
         const [coordX, coordY] = getRandomCoordinates(ship);
@@ -65,7 +64,7 @@ const GameBoard = function () {
                 board[coordX][i] = constants.WHOLE_SHIP;
             }
             ship.setPointEnd([coordX, coordY + ship.getLengthShip() - 1]);
-        }
+       }
         setStopZone(ship.getLengthShip(), coordX, coordY, axisX, board)
     }
     const getRandomCoordinates = function (ship) {
@@ -101,10 +100,11 @@ const GameBoard = function () {
     const receiveAttack = function (coordX, coordY) {
         if (board[coordX][coordY] === constants.WHOLE_SHIP) {
             for (let i = 0; i < 10; i++) {
-                if (axisX === false) {
+                if (axisX === true) {
                     if (coordX === ships[i].getPointStart()[0]) {
                         if (coordY >= ships[i].getPointStart()[1] && coordY <= ships[i].getPointEnd()[1]){
                             ships[i].hit();
+                            board[coordX][coordY] = constants.WRECKED_SHIP;
                             return true;
                         }
                     }
@@ -112,13 +112,13 @@ const GameBoard = function () {
                     if (coordY === ships[i].getPointStart()[1]) {
                         if (coordX >= ships[i].getPointStart()[0] && coordX <= ships[i].getPointEnd()[0]){
                             ships[i].hit();
+                            board[coordX][coordY] = constants.WRECKED_SHIP;
                             return true;
                         }
                     }
                 }
 
             }
-            board[coordX][coordY] = constants.WRECKED_SHIP;
         }
         else if (board[coordX][coordY] === constants.EMPTY ||
             board[coordX][coordY] === constants.STOP_ZONE) {
@@ -152,7 +152,8 @@ const GameBoard = function () {
         toggleAxis,
         randomArrangementShips,
         receiveAttack,
-        checkAllShips
+        checkAllShips,
+        board
     }
 }
 
