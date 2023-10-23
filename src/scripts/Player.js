@@ -21,8 +21,8 @@ function Player (name) {
         let y;
 
         while (flag !== 1) {
-            x = +prompt("x");
-            y = +prompt("y");
+            // x = +prompt("x");
+            // y = +prompt("y");
             date_attack = boardBot.receiveAttack(x, y);
             flag = date_attack === true ||
                    date_attack  === false ? 1 : 0;
@@ -30,7 +30,6 @@ function Player (name) {
                 alert("Вы уже сюда стреляли")
             }
         }
-        console.log(boardBot.board)
     }
     function cleverBotAttack(boardUser) {
         let coordinateX;
@@ -45,7 +44,6 @@ function Player (name) {
             flag = date_attack === true ||
                    date_attack  === false ? 1 : 0;
         }
-        console.log(boardUser.board)
     }
     
     function isWin() {

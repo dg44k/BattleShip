@@ -1,0 +1,50 @@
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/style.css ***!
+  \*********************************************************************/
+@font-face {
+    font-family: Le_Murmure;
+    src: url(fonts/Le_Murmure-Regular_web..ttf);
+    src: url(fonts/le-murmure..otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-grid: #42AAFF;
+}
+
+html, body {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    font-family: Le_Murmure;
+    height: 100%;
+    background-color: var(--background-grid);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+h1 {
+    font-size: 15rem;
+}
+
+main {
+    flex: 1 1 auto;
+}
+
+footer {
+    flex: 0 0 auto;
+}

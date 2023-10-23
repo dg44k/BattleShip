@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    filename: "index.[contentHash:5].js",
+    filename: "index.[contentHash].js",
   },
   devServer: {
     port: 3000,
@@ -17,6 +17,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
+      filename: 'index.html',
       title: "Battleship"
     }),
     new MiniCssExtractPlugin()

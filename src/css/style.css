@@ -1,0 +1,95 @@
+@font-face {
+    font-family: Le_Murmure;
+    src: url(../fonts/Le_Murmure-Regular_web.ttf);
+    src: url(../fonts/le-murmure.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-grid: #42AAFF;
+    --background-footer: #b8d7e6;
+}
+
+html, body {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    font-family: Le_Murmure, serif;
+    height: 100%;
+    background-color: var(--background-grid);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+h1 {
+    font-size: 10rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    flex: 1 1 auto;
+
+    margin-top: 50px;
+}
+
+.gridUser, .gridBot {
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+.cell {
+    padding: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.gridBot > .cell:hover {
+    background-color: #a6d4fa;
+}
+
+footer{
+    flex: 0 0 auto;
+    background-color: var(--background-footer);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    padding: 10px 0;
+}
+
+.link_footer{
+    text-decoration: none;
+    color:#000;
+    font-weight: 500;
+    font-size: 19px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.img_footer{
+    width: 35px;
+    transition: .5s ease-in-out;
+}
+
+.img_footer:hover {
+    scale: 1.2; 
+}
