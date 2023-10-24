@@ -1,6 +1,7 @@
 import * as constants from './constants';
 import setStopZone from "./setStopZone";
 import Ship from "./Ship";
+import {logPlugin} from "@babel/preset-env/lib/debug";
 
 
 const GameBoard = function () {
@@ -24,7 +25,7 @@ const GameBoard = function () {
         }
         return board;
     }
-    const randomArrangementShips = function () {
+    const arrangementShips = function () {
         const four_deck = new Ship(4);
         cycleArrangement(four_deck);
         ships.push(four_deck);
@@ -58,12 +59,13 @@ const GameBoard = function () {
         const single_deck_4 = new Ship(1);
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
+        console.log(board)
     }
     const cycleArrangement = function (ship) {
         const [coordX, coordY] = getRandomCoordinates(ship);
         ship.setPointStart([coordX, coordY]);
 
-        if (ship.axis === "Y") {
+        if (ship.getAxis() === "Y") {
             for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
                 board[i][coordY] = constants.WHOLE_SHIP;
             }
@@ -74,6 +76,7 @@ const GameBoard = function () {
             }
             ship.setPointEnd([coordX, coordY + ship.getLengthShip() - 1]);
        }
+        console.log(board)
         setStopZone(ship, board)
     }
     const getRandomCoordinates = function (ship) {
@@ -108,7 +111,7 @@ const GameBoard = function () {
     }
 
     function fillDestroyCells (ship) {
-        if (ship.axis === "Y") {
+        if (ship.getAxis() === "Y") {
             for (let i = ship.getPointStart()[0]; i < ship.getPointStart()[0] + ship.getLengthShip(); i++) {
                 board[i][ship.getPointStart()[1]] = constants.DESTROY_WHOLE;
             }
@@ -146,10 +149,10 @@ const GameBoard = function () {
         }
     }
     function toggleAxis() {
-        if (Math.floor(Math.random()) === 0){
-            return "Y";
+        if (Math.floor(Math.random()*10) >= 4){
+            return "X";
         }
-        return "X";
+        return "Y";
     }
     function checkAllShips() {
         for (let i = 0; i < ships.length; i++) {
@@ -166,7 +169,7 @@ const GameBoard = function () {
         createBoard,
         checkShipNearby,
         toggleAxis,
-        randomArrangementShips,
+        arrangementShips,
         receiveAttack,
         checkAllShips,
         getBoard,
