@@ -4,7 +4,14 @@ const Ship = function(length) {
     let life_ship = false;
     let point_start = [0, 0];
     let point_end = [0, 0];
+    let axis;
 
+    function getAxis() {
+        return axis;
+    }
+    function setAxis(axis) {
+        this.axis = axis;
+    }
     function getLengthShip() {
         return length_ship;
     }
@@ -40,7 +47,9 @@ const Ship = function(length) {
         getPointStart,
         getPointEnd,
         setPointStart,
-        setPointEnd
+        setPointEnd,
+        getAxis,
+        setAxis
     }
 };
 
