@@ -35,7 +35,6 @@ const setStopZone = function (ship, board) {
             }
 
         } catch (e) {}
-        console.log(board)
     } else {
         try {
             if (ship.getPointStart()[1] !== 0) {
@@ -69,7 +68,6 @@ const setStopZone = function (ship, board) {
                 }
             }
         } catch (e) {}
-        console.log(board)
     }
 }
 

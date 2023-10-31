@@ -55,8 +55,12 @@ main {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
 }
+
+.nameBot, .nameUser {
+    font-size: 3rem;
+}
+
 .cell {
-    position: relative;
     border: 1px solid black;
     cursor: pointer;
 }
@@ -66,23 +70,33 @@ main {
 }
 
 .whole {
-    background-color: #023052;
+    border: 1px solid black;
+    background-color: #1b6c7a;
 }
 
 .miss {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 10px;
-    border-radius: 50%;
-    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.miss::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+
 .wrecked {
+    border: 1px solid black;
     background-color: #e05454;
 }
 
 .destroyer {
+    border: 1px solid black;
     background: repeating-linear-gradient(
     30deg,
     #e05454,
@@ -108,7 +122,6 @@ footer{
     font-weight: 500;
     font-size: 19px;
     display: flex;
-    gap: 10px;
     align-items: center;
 }
 

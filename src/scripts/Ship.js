@@ -9,8 +9,8 @@ const Ship = function(length) {
     function getAxis() {
         return axis;
     }
-    function setAxis(axis) {
-        this.axis = axis;
+    function setAxis(ax) {
+        axis = ax;
     }
     function getLengthShip() {
         return length_ship;

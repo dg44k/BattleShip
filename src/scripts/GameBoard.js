@@ -1,7 +1,6 @@
 import * as constants from './constants';
 import setStopZone from "./setStopZone";
 import Ship from "./Ship";
-import {logPlugin} from "@babel/preset-env/lib/debug";
 
 
 const GameBoard = function () {
@@ -59,7 +58,6 @@ const GameBoard = function () {
         const single_deck_4 = new Ship(1);
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
-        console.log(board)
     }
     const cycleArrangement = function (ship) {
         const [coordX, coordY] = getRandomCoordinates(ship);
@@ -76,7 +74,6 @@ const GameBoard = function () {
             }
             ship.setPointEnd([coordX, coordY + ship.getLengthShip() - 1]);
        }
-        console.log(board)
         setStopZone(ship, board)
     }
     const getRandomCoordinates = function (ship) {
@@ -121,7 +118,11 @@ const GameBoard = function () {
                 board[ship.getPointStart()[0]][i] = constants.DESTROY_WHOLE;
             }
         }
-
+        return {
+            attack: true,
+            ship_life: true,
+            ship
+        }
     }
 
     function checkAttackShip(coordX, coordY) {
@@ -132,6 +133,10 @@ const GameBoard = function () {
                     fillDestroyCells(ships[i])
                 } else {
                     board[coordX][coordY] = constants.WRECKED_SHIP;
+                    return {
+                        attack: true,
+                        ship_life: false
+                    }
                 }
             }
         }
@@ -145,7 +150,15 @@ const GameBoard = function () {
         else if (board[coordX][coordY] === constants.EMPTY ||
             board[coordX][coordY] === constants.STOP_ZONE) {
             board[coordX][coordY] = constants.MISS;
-            return false;
+            return {
+                attack: false,
+                ship_life: false
+            };
+        } else {
+            return {
+                attack: undefined,
+                ship_life: undefined
+            };
         }
     }
     function toggleAxis() {
