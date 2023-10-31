@@ -8,9 +8,10 @@ export function startGame() {
 
     const name = prompt("What is name?", "User");
     document.querySelector('.nameUser').textContent = name;
+    document.querySelector('.nameBot').textContent = 'Bot';
 
     const user = new Player(name);
-    const bot = new Player("Bot Grigoriy");
+    const bot = new Player("Bot");
 
     const field_bot = board_bot.createBoard();
     board_bot.arrangementShips();
@@ -28,19 +29,23 @@ export function startGame() {
 
     let bot_attack;
     let user_attack;
+    let turn;
 
     gridBot.addEventListener('click', (e) => {
         if (e.target === gridBot) return;
+        if (turn === false) return;
         allCellsBot.forEach(item => {
             if (e.target === item) {
-                user_attack = user.userAttack(board_bot, item.dataset.idX, item.dataset.idY);
+                user_attack = user.userAttack(board_bot, item.dataset.idY, item.dataset.idX);
                 if (user_attack === undefined) return;
                 getAttack(user_attack, allCellsBot);
                 checkEndGame(board_bot, user);
+                turn = false;
 
                 bot_attack = bot.cleverBotAttack(board_user);
                 getAttack(bot_attack, allCellsUser);
                 checkEndGame (board_user, bot)
+                turn = true;
 
             }
         });
@@ -48,7 +53,9 @@ export function startGame() {
 
     function checkEndGame(board, player) {
         if (board.checkAllShips() === true) {
-            player.isWin(player)
+            setTimeout(() => {
+                player.isWin(player);
+            }, 500);
         }
     }
 }
