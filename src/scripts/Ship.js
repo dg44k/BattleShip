@@ -36,8 +36,7 @@ const Ship = function(length) {
         return count_hit;
     }
     const isSunk = function () {
-        count_hit === length_ship ? life_ship = true : life_ship = false;
-        return life_ship;
+        return life_ship = count_hit === length_ship;
     }
     return {
         getLifeShip,

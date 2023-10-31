@@ -1,6 +1,7 @@
 import * as constants from './constants';
 import setStopZone from "./setStopZone";
 import Ship from "./Ship";
+import ship from "./Ship";
 
 
 const GameBoard = function () {
@@ -58,21 +59,23 @@ const GameBoard = function () {
         const single_deck_4 = new Ship(1);
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
+
+        console.log(board)
     }
     const cycleArrangement = function (ship) {
-        const [coordX, coordY] = getRandomCoordinates(ship);
-        ship.setPointStart([coordX, coordY]);
+        const [coordY, coordX] = getRandomCoordinates(ship);
+        ship.setPointStart([coordY, coordX]);
 
         if (ship.getAxis() === "Y") {
-            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
-                board[i][coordY] = constants.WHOLE_SHIP;
-            }
-            ship.setPointEnd([coordX + ship.getLengthShip() - 1, coordY]);
-        } else {
             for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
-                board[coordX][i] = constants.WHOLE_SHIP;
+                board[i][coordX] = constants.WHOLE_SHIP;
             }
-            ship.setPointEnd([coordX, coordY + ship.getLengthShip() - 1]);
+            ship.setPointEnd([coordY + ship.getLengthShip() - 1, coordX]);
+        } else {
+            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
+                board[coordY][i] = constants.WHOLE_SHIP;
+            }
+            ship.setPointEnd([coordY, coordX + ship.getLengthShip() - 1]);
        }
         setStopZone(ship, board)
     }
@@ -84,23 +87,23 @@ const GameBoard = function () {
             coordinateX = Math.floor(Math.random()*9);
             coordinateY = Math.floor(Math.random()*9);
             ship.setAxis(toggleAxis())
-            check_nearby_ship = checkShipNearby(ship, coordinateX, coordinateY)
+            check_nearby_ship = checkShipNearby(ship, coordinateY, coordinateX)
         }
-        return [coordinateX, coordinateY];
+        return [coordinateY, coordinateX];
     }
-    const checkShipNearby = function (ship, coordX, coordY) {
+    const checkShipNearby = function (ship, coordY, coordX) {
         if (ship.getAxis() === "Y") {
-            if (coordX + ship.getLengthShip() > 9) return false;
-            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
-                if(board[i][coordY] !== constants.WHOLE_SHIP &&
-                   board[i][coordY] !== constants.STOP_ZONE) continue;
+            if (coordY + ship.getLengthShip() - 1 > 9) return false;
+            for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
+                if(board[i][coordX] !== constants.WHOLE_SHIP &&
+                   board[i][coordX] !== constants.STOP_ZONE) continue;
                 else return false;
             }
         } else {
-            if (coordY + ship.getLengthShip() > 9) return false;
-            for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
-                if(board[coordX][i] !== constants.WHOLE_SHIP &&
-                    board[coordX][i] !== constants.STOP_ZONE) continue;
+            if (coordX + ship.getLengthShip() - 1 > 9) return false;
+            for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
+                if(board[coordY][i] !== constants.WHOLE_SHIP &&
+                    board[coordY][i] !== constants.STOP_ZONE) continue;
                 else return false;
             }
         }
@@ -112,7 +115,6 @@ const GameBoard = function () {
             for (let i = ship.getPointStart()[0]; i < ship.getPointStart()[0] + ship.getLengthShip(); i++) {
                 board[i][ship.getPointStart()[1]] = constants.DESTROY_WHOLE;
             }
-            ship.setPointEnd([ship.getPointStart()[0] + ship.getLengthShip() - 1, ship.getPointStart()[1]]);
         } else {
             for (let i = ship.getPointStart()[1]; i < ship.getPointStart()[1] + ship.getLengthShip(); i++) {
                 board[ship.getPointStart()[0]][i] = constants.DESTROY_WHOLE;
@@ -125,31 +127,38 @@ const GameBoard = function () {
         }
     }
 
-    function checkAttackShip(coordX, coordY) {
+    function checkAttackShip(coordY, coordX) {
         for (let i = 0; i < 10; i++) {
-            if (coordY >= ships[i].getPointStart()[1] && coordY <= ships[i].getPointEnd()[1]){
-                ships[i].hit();
-                if (ships[i].isSunk() === true) {
-                    fillDestroyCells(ships[i])
-                } else {
-                    board[coordX][coordY] = constants.WRECKED_SHIP;
-                    return {
-                        attack: true,
-                        ship_life: false
+                if (coordY >= ships[i].getPointStart()[0] &&
+                    coordY <= ships[i].getPointEnd()[0]  &&
+                    ships[i].getPointStart()[1] === coordX ||
+                    coordX >= ships[i].getPointStart()[1] &&
+                    coordX <= ships[i].getPointEnd()[1]  &&
+                    ships[i].getPointStart()[0] === coordY)
+                {
+                    ships[i].hit();
+                    if (ships[i].isSunk() === true) {
+                        return fillDestroyCells(ships[i]);
+
+                    } else {
+                        board[coordY][coordX] = constants.WRECKED_SHIP;
+                        return {
+                            attack: true,
+                            ship_life: false
+                        }
                     }
                 }
-            }
         }
         return true;
     }
 
-    const receiveAttack = function (coordX, coordY) {
-        if (board[coordX][coordY] === constants.WHOLE_SHIP) {
-            return checkAttackShip(coordX, coordY);
+    const receiveAttack = function (coordY, coordX) {
+        if (board[coordY][coordX] === constants.WHOLE_SHIP) {
+            return checkAttackShip(coordY, coordX);
         }
-        else if (board[coordX][coordY] === constants.EMPTY ||
-            board[coordX][coordY] === constants.STOP_ZONE) {
-            board[coordX][coordY] = constants.MISS;
+        else if (board[coordY][coordX] === constants.EMPTY ||
+            board[coordY][coordX] === constants.STOP_ZONE) {
+            board[coordY][coordX] = constants.MISS;
             return {
                 attack: false,
                 ship_life: false
@@ -162,10 +171,8 @@ const GameBoard = function () {
         }
     }
     function toggleAxis() {
-        if (Math.floor(Math.random()*10) >= 4){
-            return "X";
-        }
-        return "Y";
+        if (Math.floor(Math.random() * 10) > 4) return "X";
+        else return "Y";
     }
     function checkAllShips() {
         for (let i = 0; i < ships.length; i++) {
