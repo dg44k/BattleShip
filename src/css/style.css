@@ -42,10 +42,20 @@ h1 {
 main {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 200px;
     flex: 1 1 auto;
 
     margin-top: 50px;
+}
+
+@media (min-width: 200px) and (max-width: 500px){
+    main {
+        gap: 100px;
+    }
+    .botBlock {
+        margin-bottom: 50px;
+    }
 }
 
 .gridUser, .gridBot {
@@ -65,7 +75,8 @@ main {
     cursor: pointer;
 }
 
-.gridBot > .cell:hover {
+.gridBot > .cell:hover:not(.wrecked,
+.miss, .destroyer) {
     background-color: #a6d4fa;
 }
 

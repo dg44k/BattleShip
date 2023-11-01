@@ -7,7 +7,7 @@ export function startGame() {
     const board_user = new GameBoard();
 
     const name = prompt("What is name?", "User");
-    document.querySelector('.nameUser').textContent = name;
+    document.querySelector('.nameUser').textContent = name || 'User';
     document.querySelector('.nameBot').textContent = 'Bot';
 
     const user = new Player(name);
@@ -42,11 +42,12 @@ export function startGame() {
                 checkEndGame(board_bot, user);
                 turn = false;
 
-                bot_attack = bot.cleverBotAttack(board_user);
-                getAttack(bot_attack, allCellsUser);
-                checkEndGame (board_user, bot)
-                turn = true;
-
+                setTimeout(() => {
+                    bot_attack = bot.cleverBotAttack(board_user);
+                    getAttack(bot_attack, allCellsUser);
+                    checkEndGame (board_user, bot)
+                    turn = true;
+                }, 500)
             }
         });
     });
