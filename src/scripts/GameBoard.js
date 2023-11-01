@@ -84,10 +84,11 @@ const GameBoard = function () {
         let coordinateY;
         let check_nearby_ship = false;
         while (check_nearby_ship !== true) {
-            coordinateX = Math.floor(Math.random()*9);
-            coordinateY = Math.floor(Math.random()*9);
+            coordinateX = Math.floor(Math.random()*10);
+            coordinateY = Math.floor(Math.random()*10);
             ship.setAxis(toggleAxis())
             check_nearby_ship = checkShipNearby(ship, coordinateY, coordinateX)
+            console.log(coordinateY, coordinateX)
         }
         return [coordinateY, coordinateX];
     }

@@ -18,11 +18,11 @@ const setStopZone = function (ship, board) {
             const j = ship.getPointStart()[1] - 1;
             if (ship.getPointStart()[0] !== 0) {
                 for (let i = ship.getPointStart()[0] - 1; i < ship.getLengthShip() + ship.getPointStart()[0] + 1; i++) {
-                    if (i <= 9) board[i][j] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[i][j] = constants.STOP_ZONE;
                 }
             } else {
                 for (let i = ship.getPointStart()[0]; i < ship.getLengthShip() + ship.getPointStart()[0] + 1; i++) {
-                    if (i <= 9) board[i][j] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[i][j] = constants.STOP_ZONE;
                 }
             }
         } catch (e) {}
@@ -30,11 +30,11 @@ const setStopZone = function (ship, board) {
             const j = ship.getPointStart()[1] + 1;
             if (ship.getPointStart()[0] !== 0) {
                 for (let i = ship.getPointStart()[0] - 1; i < ship.getLengthShip() + ship.getPointStart()[0] + 1; i++) {
-                    if (i <= 9) board[i][j] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[i][j] = constants.STOP_ZONE;
                 }
             } else {
                 for (let i = ship.getPointStart()[0]; i < ship.getLengthShip() + ship.getPointStart()[0] + 1; i++) {
-                    if (i <= 9) board[i][j] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[i][j] = constants.STOP_ZONE;
                 }
             }
 
@@ -56,11 +56,11 @@ const setStopZone = function (ship, board) {
             const j = ship.getPointStart()[0] - 1;
             if (ship.getPointStart()[0] !== 0) {
                 for (let i = ship.getPointStart()[1] - 1; i < ship.getLengthShip() + ship.getPointStart()[1] + 1; i++) {
-                    if (i <= 9) board[j][i] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[j][i] = constants.STOP_ZONE;
                 }
             } else {
                 for (let i = ship.getPointStart()[1]; i < ship.getLengthShip() + ship.getPointStart()[1] + 1; i++) {
-                    if (i <= 9) board[j][i] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[j][i] = constants.STOP_ZONE;
                 }
             }
         } catch (e) {}
@@ -68,11 +68,11 @@ const setStopZone = function (ship, board) {
             const j = ship.getPointStart()[0] + 1;
             if (ship.getPointStart()[1] !== 0) {
                 for (let i = ship.getPointStart()[1] - 1; i < ship.getLengthShip() + ship.getPointStart()[1] + 1; i++) {
-                    if (i <= 9) board[j][i] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[j][i] = constants.STOP_ZONE;
                 }
             } else {
                 for (let i = ship.getPointStart()[1]; i < ship.getLengthShip() + ship.getPointStart()[1] + 1; i++) {
-                    if (i <= 9) board[j][i] = constants.STOP_ZONE;
+                    if (i <= 9 && j <= 9 && i >= 0 && j >= 0) board[j][i] = constants.STOP_ZONE;
                 }
             }
         } catch (e) {}
