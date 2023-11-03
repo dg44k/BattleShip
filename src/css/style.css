@@ -132,7 +132,7 @@ main {
     width: 150px;
 
     rotate: 270deg;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
 }
 
 .whole {

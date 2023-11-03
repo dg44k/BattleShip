@@ -5,6 +5,10 @@ import {startGame} from "./GameCycle";
 import PictureGitHub from "../img/github.png";
 import PictureAnchor from "../img/anchor.png";
 
+window.onload = () => {
+    document.querySelector('.modal').style.display = 'block';
+};
+
 let img = new Image();
 img.src = PictureGitHub;
 img.classList.add('img_footer');

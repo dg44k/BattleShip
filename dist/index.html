@@ -1,1 +1,56 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Battleship</title><script defer="defer" src="index.%5BcontentHash%5D.js"></script><link href="main.css" rel="stylesheet"></head><body><header><h1>Battleship</h1></header><main><div class="userBlock"><h2 class="nameUser"></h2><div class="gridUser"></div></div><div class="botBlock"><h2 class="nameBot"></h2><div class="gridBot"></div></div></main><footer><a href="https:/github.com/dg44k/" class="link_footer"><span>&#169;Copyright dg44k</span></a></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship</title>
+<script defer src="index.%5BcontentHash%5D.js"></script><link href="main.css" rel="stylesheet"></head>
+<body>
+    <header>
+        <h1>Battleship</h1>
+    </header>
+    <main>
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Введите имя</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="inputName"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Подтвердить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="setting">
+            <div class="buttonsAxis">
+                <button class="btn btnX active">Axis X</button>
+                <button class="btn btnY">Axis Y</button>
+            </div>
+            <div class="shipsDaD"></div>
+            <button class="btn btnConfirm">Confirm</button>
+        </div>
+
+        <div class="wrapper">
+            <div class="userBlock">
+                <h2 class="nameUser"></h2>
+                <div class="gridUser"></div>
+            </div>
+            <div class = "anchorBlock"></div>
+            <div class="botBlock">
+                <h2 class="nameBot"></h2>
+                <div class="gridBot"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a href="https:/github.com/dg44k/" class="link_footer">
+            <span>&#169;Copyright dg44k</span>
+        </a>
+    </footer>
+</body>
+</html>
