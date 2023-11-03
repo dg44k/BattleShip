@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import setStopZone from "./setStopZone";
 import Ship from "./Ship";
-import ship from "./Ship";
+
 
 
 const GameBoard = function () {
@@ -59,8 +59,6 @@ const GameBoard = function () {
         const single_deck_4 = new Ship(1);
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
-
-        console.log(board)
     }
     const cycleArrangement = function (ship) {
         const [coordY, coordX] = getRandomCoordinates(ship);
@@ -87,8 +85,7 @@ const GameBoard = function () {
             coordinateX = Math.floor(Math.random()*10);
             coordinateY = Math.floor(Math.random()*10);
             ship.setAxis(toggleAxis())
-            check_nearby_ship = checkShipNearby(ship, coordinateY, coordinateX)
-            console.log(coordinateY, coordinateX)
+            check_nearby_ship = checkShipNearby(ship, coordinateY, coordinateX);
         }
         return [coordinateY, coordinateX];
     }
@@ -115,12 +112,21 @@ const GameBoard = function () {
         if (ship.getAxis() === "Y") {
             for (let i = ship.getPointStart()[0]; i < ship.getPointStart()[0] + ship.getLengthShip(); i++) {
                 board[i][ship.getPointStart()[1]] = constants.DESTROY_WHOLE;
+
             }
         } else {
             for (let i = ship.getPointStart()[1]; i < ship.getPointStart()[1] + ship.getLengthShip(); i++) {
                 board[ship.getPointStart()[0]][i] = constants.DESTROY_WHOLE;
             }
         }
+
+        let stop_zones = ship.getStopZones();
+        for (let i = 0; i < stop_zones.length; i++) {
+           if (board[stop_zones[i][0]][stop_zones[i][1]] !== constants.MISS) {
+               board[stop_zones[i][0]][stop_zones[i][1]] = constants.MISS;
+           }
+        }
+
         return {
             attack: true,
             ship_life: true,
@@ -159,6 +165,7 @@ const GameBoard = function () {
         }
         else if (board[coordY][coordX] === constants.EMPTY ||
             board[coordY][coordX] === constants.STOP_ZONE) {
+
             board[coordY][coordX] = constants.MISS;
             return {
                 attack: false,

@@ -4,10 +4,18 @@ const Ship = function(length) {
     let life_ship = false;
     let point_start = [0, 0];
     let point_end = [0, 0];
+    let stop_zone = [];
     let axis;
 
     function getAxis() {
         return axis;
+    }
+    function getStopZones () {
+        return stop_zone;
+    }
+
+    function setStopZones(zone) {
+        stop_zone.push(zone);
     }
     function setAxis(ax) {
         axis = ax;
@@ -48,7 +56,9 @@ const Ship = function(length) {
         setPointStart,
         setPointEnd,
         getAxis,
-        setAxis
+        setAxis,
+        getStopZones,
+        setStopZones,
     }
 };
 

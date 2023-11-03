@@ -68,9 +68,40 @@ export function getAttack (obj, allCells) {
           });
         }
       }
+      let stop_zones = obj.date_attack.ship.getStopZones();
+      for (let i = 0; i < stop_zones.length; i++) {
+        allCells.forEach(item => {
+          if (+item.dataset.idX === stop_zones[i][1] &&
+              +item.dataset.idY === stop_zones[i][0] &&
+              !item.classList.contains('miss')) {
+
+            item.classList.add('miss');
+          }
+        });
+      }
     }
   }
   else {
     targetCell.classList.add('miss');
+  }
+}
+
+export function moveTurn() {
+  const anchor = document.querySelector('.anchor');
+  const stylesAnchor = window.getComputedStyle(anchor);
+
+  switch (true) {
+    case stylesAnchor.rotate === '0deg':
+      document.querySelector('.anchor').style.rotate = '180deg';
+      break;
+    case stylesAnchor.rotate === '180deg':
+      document.querySelector('.anchor').style.rotate = '0deg';
+      break;
+    case stylesAnchor.rotate === '90deg':
+      document.querySelector('.anchor').style.rotate = '270deg';
+      break;
+    case stylesAnchor.rotate === '270deg':
+      document.querySelector('.anchor').style.rotate = '90deg';
+      break;
   }
 }

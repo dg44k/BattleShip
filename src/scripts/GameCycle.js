@@ -1,6 +1,6 @@
 import GameBoard from "./GameBoard";
 import Player from "./Player";
-import {generateBoard, showShips, getAttack} from "../DOM/dom";
+import {generateBoard, showShips, getAttack, moveTurn} from "../DOM/dom";
 
 export function startGame() {
     let board_bot = new GameBoard();
@@ -41,13 +41,15 @@ export function startGame() {
                 getAttack(user_attack, allCellsBot);
                 checkEndGame(board_bot, user);
                 turn = false;
+                moveTurn();
 
                 setTimeout(() => {
                     bot_attack = bot.cleverBotAttack(board_user);
                     getAttack(bot_attack, allCellsUser);
                     checkEndGame (board_user, bot)
                     turn = true;
-                }, 500)
+                    moveTurn();
+                }, 1000)
             }
         });
     });

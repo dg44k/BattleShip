@@ -39,8 +39,8 @@ function Player (name) {
         };
     }
     
-    function isWin(player) {
-        alert (`The ${name} won!`)
+    function isWin() {
+        alert (`${name} won!`)
     }
 
     return {
