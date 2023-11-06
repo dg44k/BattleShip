@@ -2,13 +2,9 @@ import GameBoard from "./GameBoard";
 import Player from "./Player";
 import {generateBoard, showShips, getAttack, moveTurn} from "../DOM/dom";
 
-export function startGame() {
+export function startGame(name) {
     let board_bot = new GameBoard();
     const board_user = new GameBoard();
-
-    const name = prompt("What is name?", "User");
-    document.querySelector('.nameUser').textContent = name || 'User';
-    document.querySelector('.nameBot').textContent = 'Bot';
 
     const user = new Player(name);
     const bot = new Player("Bot");
@@ -57,7 +53,7 @@ export function startGame() {
     function checkEndGame(board, player) {
         if (board.checkAllShips() === true) {
             setTimeout(() => {
-                player.isWin(player);
+                player.isWin();
                 location.reload();
             }, 500);
         }
