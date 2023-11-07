@@ -10,26 +10,27 @@
         <h1>Battleship</h1>
     </header>
     <main>
-<!--        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--            Launch demo modal-->
-<!--        </button>-->
-<!--        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--            <div class="modal-dialog modal-dialog-centered">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="staticBackdropLabel">Enter name</h5>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <label>-->
-<!--                            <input type="text" class="inputName"/>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="button" class="btn btn-primary">Understood</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="modal_block modal_block_start">
+            <div class="modal start">
+                <h2 class="title">Enter name</h2>
+                <div class="modal-content">
+                    <div>
+                        <input type="text" class="inputName">
+                    </div>
+                    <button class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal_block modal_block_end">
+            <div class="modal end">
+                <div class="modal-content">
+                    <h2 class="title_win"></h2>
+                    <button class="btn btn-newGame">New Game</button>
+                </div>
+            </div>
+        </div>
+
         <div class="setting">
             <div class="buttonsAxis">
                 <button class="btn btnX active">Axis X</button>

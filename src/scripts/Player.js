@@ -1,4 +1,5 @@
 function Player (name) {
+
     function userAttack(board_bot, y, x) {
         let flag = 0;
         let date_attack;
@@ -40,7 +41,13 @@ function Player (name) {
     }
     
     function isWin() {
-        alert (`${name} won!`)
+        document.querySelector('.end').style.display = 'flex';
+        document.querySelector('.modal_block_end').style.display = 'block';
+        document.querySelector('.title_win').textContent = `${name} won!`
+
+        document.querySelector('.btn-newGame').addEventListener('click', () => {
+            location.reload()
+        })
     }
 
     return {

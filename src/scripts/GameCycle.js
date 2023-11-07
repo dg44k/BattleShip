@@ -54,7 +54,6 @@ export function startGame(name) {
         if (board.checkAllShips() === true) {
             setTimeout(() => {
                 player.isWin();
-                location.reload();
             }, 500);
         }
     }
