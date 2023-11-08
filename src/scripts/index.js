@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         imgAnchor.classList.add('anchor');
         document.querySelector('.anchorBlock').appendChild(imgAnchor);
 
+        document.querySelector('.setting').style.display = 'flex';
+
         startGame(name);
     })
 });

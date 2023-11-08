@@ -1,7 +1,10 @@
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/style.css ***!
+  \*********************************************************************/
 @font-face {
     font-family: Le_Murmure;
-    src: url(../fonts/Le_Murmure-Regular_web.ttf);
-    src: url(../fonts/le-murmure.otf);
+    src: url(fonts/Le_Murmure-Regular_web..ttf);
+    src: url(fonts/le-murmure..otf);
 }
 
 * {
@@ -294,3 +297,4 @@ footer{
         rotate: 0deg;
     }
 }
+

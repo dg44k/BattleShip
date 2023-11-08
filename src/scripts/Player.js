@@ -9,7 +9,12 @@ function Player (name) {
             flag = date_attack.attack === true ||
                    date_attack.attack  === false ? 1 : 0;
             if (flag === 0) {
-                alert("Вы уже сюда стреляли");
+                document.querySelector('.err').style.display = 'flex';
+                document.querySelector('.modal_block_err').style.display = 'block';
+                document.querySelector('.btn-ok').addEventListener('click', () => {
+                    document.querySelector('.modal_block_err').style.display = 'none';
+                    document.querySelector('.err').style.display = 'none';
+                })
                 return undefined;
             }
         }

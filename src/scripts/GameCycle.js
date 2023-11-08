@@ -21,7 +21,7 @@ export function startGame(name) {
     generateBoard(gridUser, field_user);
     const allCellsBot = gridBot.querySelectorAll(".cell");
     const allCellsUser = gridUser.querySelectorAll(".cell");
-    showShips(board_user.getShips(), allCellsUser)
+    showShips(board_user.getShips(), allCellsUser);
 
     let bot_attack;
     let user_attack;
