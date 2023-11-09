@@ -3,7 +3,7 @@ import Player from "./Player";
 import {generateBoard, showShips, getAttack, moveTurn} from "../DOM/dom";
 
 export function startGame(name) {
-    let board_bot = new GameBoard();
+    const board_bot = new GameBoard();
     const board_user = new GameBoard();
 
     const user = new Player(name);
@@ -12,13 +12,13 @@ export function startGame(name) {
     const field_bot = board_bot.createBoard();
     board_bot.arrangementShips();
 
-    const field_user = board_user.createBoard();
-    board_user.arrangementShips();
+    // const field_user = board_user.createBoard();
+    // board_user.arrangementShips();
 
     const gridBot = document.querySelector('.gridBot');
-    const gridUser = document.querySelector('.gridUser')
+    const gridUser = document.getElementById('grid')
     generateBoard(gridBot, field_bot);
-    generateBoard(gridUser, field_user);
+    // generateBoard(gridUser, field_user);
     const allCellsBot = gridBot.querySelectorAll(".cell");
     const allCellsUser = gridUser.querySelectorAll(".cell");
     showShips(board_user.getShips(), allCellsUser);
