@@ -2,8 +2,6 @@ import * as constants from './constants';
 import setStopZone from "./setStopZone";
 import Ship from "./Ship";
 
-
-
 const GameBoard = function () {
     let board = [];
     let ships = [];
@@ -25,6 +23,7 @@ const GameBoard = function () {
         }
         return board;
     }
+
     const arrangementShips = function () {
         const four_deck = new Ship(4);
         cycleArrangement(four_deck);
@@ -60,6 +59,7 @@ const GameBoard = function () {
         cycleArrangement(single_deck_4);
         ships.push(single_deck_4);
     }
+
     const cycleArrangement = function (ship) {
         const [coordY, coordX] = getRandomCoordinates(ship);
         ship.setPointStart([coordY, coordX]);
@@ -77,6 +77,7 @@ const GameBoard = function () {
        }
         setStopZone(ship, board)
     }
+
     const getRandomCoordinates = function (ship) {
         let coordinateX;
         let coordinateY;
@@ -89,6 +90,7 @@ const GameBoard = function () {
         }
         return [coordinateY, coordinateX];
     }
+
     const checkShipNearby = function (ship, coordY, coordX) {
         if (ship.getAxis() === "Y") {
             if (coordY + ship.getLengthShip() - 1 > 9) return false;
