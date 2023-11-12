@@ -3,28 +3,28 @@ import Player from "./Player";
 import {generateBoard, showShips, getAttack, moveTurn} from "../DOM/dom";
 
 export function startGame(name) {
-    let board_bot = new GameBoard();
-    const board_user = new GameBoard();
+    let boardBot = new GameBoard();
+    const boardUser = new GameBoard();
 
     const user = new Player(name);
     const bot = new Player("Bot");
 
-    const field_bot = board_bot.createBoard();
-    board_bot.arrangementShips();
+    const fieldBot = boardBot.createBoard();
+    boardBot.arrangeShips();
 
-    const field_user = board_user.createBoard();
-    board_user.arrangementShips();
+    const fieldUser = boardUser.createBoard();
+    boardUser.arrangeShips();
 
     const gridBot = document.querySelector('.gridBot');
     const gridUser = document.querySelector('.gridUser')
-    generateBoard(gridBot, field_bot);
-    generateBoard(gridUser, field_user);
+    generateBoard(gridBot, fieldBot);
+    generateBoard(gridUser, fieldUser);
     const allCellsBot = gridBot.querySelectorAll(".cell");
     const allCellsUser = gridUser.querySelectorAll(".cell");
-    showShips(board_user.getShips(), allCellsUser);
+    showShips(boardUser.getShips(), allCellsUser);
 
-    let bot_attack;
-    let user_attack;
+    let botAttack;
+    let userAttack;
     let turn;
 
     gridBot.addEventListener('click', (e) => {
@@ -32,17 +32,17 @@ export function startGame(name) {
         if (turn === false) return;
         allCellsBot.forEach(item => {
             if (e.target === item) {
-                user_attack = user.userAttack(board_bot, item.dataset.idY, item.dataset.idX);
-                if (user_attack === undefined) return;
-                getAttack(user_attack, allCellsBot);
-                checkEndGame(board_bot, user);
+                userAttack = user.userAttack(boardBot, item.dataset.idY, item.dataset.idX);
+                if (userAttack === undefined) return;
+                getAttack(userAttack, allCellsBot);
+                checkEndGame(boardBot, user);
                 turn = false;
                 moveTurn();
 
                 setTimeout(() => {
-                    bot_attack = bot.cleverBotAttack(board_user);
-                    getAttack(bot_attack, allCellsUser);
-                    checkEndGame (board_user, bot)
+                    botAttack = bot.cleverBotAttack(boardUser);
+                    getAttack(botAttack, allCellsUser);
+                    checkEndGame (boardUser, bot)
                     turn = true;
                     moveTurn();
                 }, 1000)
@@ -53,7 +53,7 @@ export function startGame(name) {
     function checkEndGame(board, player) {
         if (board.checkAllShips() === true) {
             setTimeout(() => {
-                player.isWin();
+                player.showWinUI();
             }, 500);
         }
     }

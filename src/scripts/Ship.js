@@ -1,51 +1,62 @@
 const Ship = function(length) {
-    let length_ship = length;
-    let count_hit = 0;
-    let life_ship = false;
-    let point_start = [0, 0];
-    let point_end = [0, 0];
-    let stop_zone = [];
+    let lengthShip = length;
+    let countHit = 0;
+    let lifeShip = false;
+    let pointStart = [0, 0];
+    let pointEnd = [0, 0];
+    let stopZone = [];
     let axis;
 
     function getAxis() {
         return axis;
     }
+
     function getStopZones () {
-        return stop_zone;
+        return stopZone;
     }
 
     function setStopZones(zone) {
-        stop_zone.push(zone);
+        stopZone.push(zone);
     }
+
     function setAxis(ax) {
         axis = ax;
     }
+
     function getLengthShip() {
-        return length_ship;
+        return lengthShip;
     }
+
     function getLifeShip() {
-        return life_ship;
+        return lifeShip;
     }
+
     function getPointStart() {
-        return point_start;
+        return pointStart;
     }
+
     function getPointEnd() {
-        return point_end;
+        return pointEnd;
     }
+
     function setPointStart(point) {
-        point_start = point;
+        pointStart = point;
     }
+
     function setPointEnd(point) {
-        point_end = point;
+        pointEnd = point;
     }
+
     const hit = function() {
-        count_hit += 1;
+        countHit += 1;
         isSunk();
-        return count_hit;
+        return countHit;
     }
+
     const isSunk = function () {
-        return life_ship = count_hit === length_ship;
+        return lifeShip = countHit === lengthShip;
     }
+
     return {
         getLifeShip,
         getLengthShip,

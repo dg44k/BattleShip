@@ -18,16 +18,16 @@ export function showShips(ships, allCells) {
 
     if (ships[i].getAxis() === "Y") {
       for (let k = y; k <= ships[i].getPointEnd()[0]; k++) {
-        searchCell(k, x, allCells);
+        findCell(k, x, allCells);
       }
     } else {
       for (let k = x; k <= ships[i].getPointEnd()[1]; k++) {
-        searchCell(y, k, allCells);
+        findCell(y, k, allCells);
       }
     }
   }
 
-  function searchCell(y, x, allCells) {
+  function findCell(y, x, allCells) {
     allCells.forEach(item => {
       if (+item.dataset.idX === x && +item.dataset.idY === y) {
         item.classList.add("whole");
@@ -44,35 +44,35 @@ export function getAttack (obj, allCells) {
     }
   });
 
-  if (obj.date_attack.attack === true) {
+  if (obj.dateAttack.attack === true) {
     targetCell.classList.remove('whole');
     targetCell.classList.add('wrecked');
 
-    if (obj.date_attack.ship_life === true) {
-      if (obj.date_attack.ship.getAxis() === "Y") {
-        for (let i = obj.date_attack.ship.getPointStart()[0]; i < obj.date_attack.ship.getPointStart()[0] + obj.date_attack.ship.getLengthShip(); i++) {
+    if (obj.dateAttack.shipLife === true) {
+      if (obj.dateAttack.ship.getAxis() === "Y") {
+        for (let i = obj.dateAttack.ship.getPointStart()[0]; i < obj.dateAttack.ship.getPointStart()[0] + obj.dateAttack.ship.getLengthShip(); i++) {
           allCells.forEach(item => {
-            if (+item.dataset.idX === obj.date_attack.ship.getPointStart()[1] && +item.dataset.idY === i) {
+            if (+item.dataset.idX === obj.dateAttack.ship.getPointStart()[1] && +item.dataset.idY === i) {
               item.classList.remove('whole');
               item.classList.add('destroyer');
             }
           });
         }
       } else {
-        for (let i = obj.date_attack.ship.getPointStart()[1]; i < obj.date_attack.ship.getPointStart()[1] + obj.date_attack.ship.getLengthShip(); i++) {
+        for (let i = obj.dateAttack.ship.getPointStart()[1]; i < obj.dateAttack.ship.getPointStart()[1] + obj.dateAttack.ship.getLengthShip(); i++) {
           allCells.forEach(item => {
-            if (+item.dataset.idX === i && +item.dataset.idY === obj.date_attack.ship.getPointStart()[0]) {
+            if (+item.dataset.idX === i && +item.dataset.idY === obj.dateAttack.ship.getPointStart()[0]) {
               item.classList.remove('whole');
               item.classList.add('destroyer');
             }
           });
         }
       }
-      let stop_zones = obj.date_attack.ship.getStopZones();
-      for (let i = 0; i < stop_zones.length; i++) {
+      let stopZones = obj.dateAttack.ship.getStopZones();
+      for (let i = 0; i < stopZones.length; i++) {
         allCells.forEach(item => {
-          if (+item.dataset.idX === stop_zones[i][1] &&
-              +item.dataset.idY === stop_zones[i][0] &&
+          if (+item.dataset.idX === stopZones[i][1] &&
+              +item.dataset.idY === stopZones[i][0] &&
               !item.classList.contains('miss')) {
 
             item.classList.add('miss');

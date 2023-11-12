@@ -25,46 +25,27 @@ const GameBoard = function () {
         }
         return board;
     }
-    const arrangementShips = function () {
-        const four_deck = new Ship(4);
-        cycleArrangement(four_deck);
-        ships.push(four_deck);
 
-        const triple_deck_1 = new Ship(3);
-        cycleArrangement(triple_deck_1);
-        ships.push(triple_deck_1);
-        const triple_deck_2 = new Ship(3);
-        cycleArrangement(triple_deck_2);
-        ships.push(triple_deck_2);
-
-        const dual_deck_1 = new Ship(2);
-        cycleArrangement(dual_deck_1);
-        ships.push(dual_deck_1);
-        const dual_deck_2 = new Ship(2);
-        cycleArrangement(dual_deck_2);
-        ships.push(dual_deck_2);
-        const dual_deck_3 = new Ship(2);
-        cycleArrangement(dual_deck_3);
-        ships.push(dual_deck_3);
-
-        const single_deck_1 = new Ship(1);
-        cycleArrangement(single_deck_1);
-        ships.push(single_deck_1);
-        const single_deck_2 = new Ship(1);
-        cycleArrangement(single_deck_2);
-        ships.push(single_deck_2);
-        const single_deck_3 = new Ship(1);
-        cycleArrangement(single_deck_3);
-        ships.push(single_deck_3);
-        const single_deck_4 = new Ship(1);
-        cycleArrangement(single_deck_4);
-        ships.push(single_deck_4);
+    const arrangeShips = function () {
+        constants.CONFIG_ARRAY_SHIPS.forEach(ship => {
+            let count = 0;
+            let objShip;
+            while (ship.count !== count) {
+                objShip = new Ship(ship.length);
+                cycleArrangement(objShip);
+                ships.push(objShip);
+                count++;
+            }
+            
+        });
+        console.log(ships);
     }
+
     const cycleArrangement = function (ship) {
         const [coordY, coordX] = getRandomCoordinates(ship);
         ship.setPointStart([coordY, coordX]);
 
-        if (ship.getAxis() === "Y") {
+        if (ship.getAxis() === constants.AXIS_Y) {
             for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
                 board[i][coordX] = constants.WHOLE_SHIP;
             }
@@ -77,39 +58,43 @@ const GameBoard = function () {
        }
         setStopZone(ship, board)
     }
+
     const getRandomCoordinates = function (ship) {
         let coordinateX;
         let coordinateY;
-        let check_nearby_ship = false;
-        while (check_nearby_ship !== true) {
+        let checkNearbyShip = false;
+        while (checkNearbyShip !== true) {
             coordinateX = Math.floor(Math.random()*10);
             coordinateY = Math.floor(Math.random()*10);
             ship.setAxis(toggleAxis())
-            check_nearby_ship = checkShipNearby(ship, coordinateY, coordinateX);
+            checkNearbyShip = checkShipNearby(ship, coordinateY, coordinateX);
         }
         return [coordinateY, coordinateX];
     }
+
     const checkShipNearby = function (ship, coordY, coordX) {
-        if (ship.getAxis() === "Y") {
-            if (coordY + ship.getLengthShip() - 1 > 9) return false;
+        if (ship.getAxis() === constants.AXIS_Y) {
+            if (coordY + ship.getLengthShip() - 1 > constants.LAST_NUMBER_BOARD) return false;
             for (let i = coordY; i < coordY + ship.getLengthShip(); i++) {
                 if(board[i][coordX] !== constants.WHOLE_SHIP &&
                    board[i][coordX] !== constants.STOP_ZONE) continue;
-                else return false;
+                
+                return false;
             }
         } else {
-            if (coordX + ship.getLengthShip() - 1 > 9) return false;
+            if (coordX + ship.getLengthShip() - 1 > constants.LAST_NUMBER_BOARD) return false;
             for (let i = coordX; i < coordX + ship.getLengthShip(); i++) {
                 if(board[coordY][i] !== constants.WHOLE_SHIP &&
                     board[coordY][i] !== constants.STOP_ZONE) continue;
-                else return false;
+                
+                return false;
             }
         }
         return true;
     }
 
     function fillDestroyCells (ship) {
-        if (ship.getAxis() === "Y") {
+        if (ship.getAxis() === constants.AXIS_Y) {
             for (let i = ship.getPointStart()[0]; i < ship.getPointStart()[0] + ship.getLengthShip(); i++) {
                 board[i][ship.getPointStart()[1]] = constants.DESTROY_WHOLE;
 
@@ -120,16 +105,16 @@ const GameBoard = function () {
             }
         }
 
-        let stop_zones = ship.getStopZones();
-        for (let i = 0; i < stop_zones.length; i++) {
-           if (board[stop_zones[i][0]][stop_zones[i][1]] !== constants.MISS) {
-               board[stop_zones[i][0]][stop_zones[i][1]] = constants.MISS;
+        let stopZones = ship.getStopZones();
+        for (let i = 0; i < stopZones.length; i++) {
+           if (board[stopZones[i][0]][stopZones[i][1]] !== constants.MISS) {
+               board[stopZones[i][0]][stopZones[i][1]] = constants.MISS;
            }
         }
 
         return {
             attack: true,
-            ship_life: true,
+            shipLife: true,
             ship
         }
     }
@@ -151,7 +136,7 @@ const GameBoard = function () {
                         board[coordY][coordX] = constants.WRECKED_SHIP;
                         return {
                             attack: true,
-                            ship_life: false
+                            shipLife: false
                         }
                     }
                 }
@@ -169,18 +154,19 @@ const GameBoard = function () {
             board[coordY][coordX] = constants.MISS;
             return {
                 attack: false,
-                ship_life: false
+                shipLife: false
             };
         } else {
             return {
                 attack: undefined,
-                ship_life: undefined
+                shipLife: undefined
             };
         }
     }
     function toggleAxis() {
-        if (Math.floor(Math.random() * 10) > 4) return "X";
-        else return "Y";
+        if (Math.floor(Math.random() * 10) > constants.NUMBER_DEFINE_AXIS) return constants.AXIS_X;
+        
+        return constants.AXIS_Y;
     }
     function checkAllShips() {
         for (let i = 0; i < ships.length; i++) {
@@ -197,7 +183,7 @@ const GameBoard = function () {
         createBoard,
         checkShipNearby,
         toggleAxis,
-        arrangementShips,
+        arrangeShips,
         receiveAttack,
         checkAllShips,
         getBoard,
