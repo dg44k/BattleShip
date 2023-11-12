@@ -10,17 +10,17 @@ beforeAll(() => {
     obj.arrangeShips()
 });
 
-test('Проверка на наличие 100 клеток', () => {
+test('Check 100 cells', () => {
     expect(board.reduce((acc, elem) => {
         return acc + elem.length;
     }, 0)).toBe(100);
 });
 
-test('Проверка атаки в корабль', () => {
+test('Check attack ship', () => {
     const date_obj = obj.receiveAttack(1, 1);
     expect(date_obj.attack).toBe(false);
 });
 
-test('Проверка того, что все корабли уничтожены', () => {
+test('Check, what all ships destroyer', () => {
     expect(obj.checkAllShips()).toBe(false);
 });
