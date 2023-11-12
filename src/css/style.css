@@ -114,34 +114,7 @@ h1 {
 }
 
 main {
-    display: flex;
-    gap: 80px;
     flex: 1 1 auto;
-}
-
-.setting {
-    height: 450px;
-    margin-left: 50px;
-    margin-bottom: 10px;
-    background-color: #5680E9;
-    padding: 10px;
-
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.buttonsAxis {
-    display: flex;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.shipsDaD {
-    width: 200px;
-    height: 400px;
-    border: 1px solid #000;
 }
 
 .btn {
@@ -155,28 +128,6 @@ main {
     border: none;
     outline: none;
 }
-
-.buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.btnConfirm, .btnRandom {
-    font-size: 2.5rem;
-    margin-top: 10px;
-
-    transition: .5s ease-in-out;
-}
-
-.btnConfirm:hover, .btnRandom:hover {
-    background-color: #a8a8a8;
-}
-
-.active {
-    background-color: #a8a8a8;
-    transition: .5s ease-in-out;
-}
-
 
 .wrapper {
     display: flex;

@@ -6,9 +6,9 @@ import PictureAnchor from "../img/anchor.png";
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.start').style.display = 'block';
     document.querySelector('.btn-primary').addEventListener('click', () => {
-        const name = document.querySelector('.inputName').value;
+        const name = document.querySelector('.inputName').value || 'User';
 
-        document.querySelector('.nameUser').textContent = name || 'User';
+        document.querySelector('.nameUser').textContent = name;
         document.querySelector('.nameBot').textContent = 'Bot';
 
         document.querySelector('.modal').style.display = 'none';
@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         imgAnchor.src = PictureAnchor;
         imgAnchor.classList.add('anchor');
         document.querySelector('.anchorBlock').appendChild(imgAnchor);
-
-        document.querySelector('.setting').style.display = 'flex';
 
         startGame(name);
     })

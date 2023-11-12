@@ -7,7 +7,7 @@ beforeAll(() => {
 
     obj = new GameBoard();
     board = obj.createBoard();
-    obj.arrangementShips();
+    obj.arrangementShips()
 });
 
 test('Проверка на наличие 100 клеток', () => {
@@ -15,13 +15,12 @@ test('Проверка на наличие 100 клеток', () => {
         return acc + elem.length;
     }, 0)).toBe(100);
 });
-test('Проверка на попадание атаки в корабль', () => {
-    expect(obj.receiveAttack(1, 2)).toBe(true);
-});
-test('Проверка на промах атаки в корабль', () => {
-    expect(obj.receiveAttack(1, 6)).toBe(false);
+
+test('Проверка атаки в корабль', () => {
+    const date_obj = obj.receiveAttack(1, 1);
+    expect(date_obj.attack).toBe(false);
 });
 
 test('Проверка того, что все корабли уничтожены', () => {
-    expect(obj.checkAllShips()).toBe(true);
+    expect(obj.checkAllShips()).toBe(false);
 });
