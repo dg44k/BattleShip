@@ -6,8 +6,7 @@ function Player (name) {
 
         while (flag !== 1) {
             dateAttack = boardBot.receiveAttack(+y, +x);
-            flag = dateAttack.attack === true ||
-                   dateAttack.attack  === false ? 1 : 0;
+            flag = Number(typeof dateAttack.attacked === 'boolean');
             if (flag === 0) {
                 document.querySelector('.err').style.display = 'flex';
                 document.querySelector('.modal_block_err').style.display = 'block';
@@ -35,8 +34,7 @@ function Player (name) {
             coordinateX = Math.floor(Math.random()*10);
             coordinateY = Math.floor(Math.random()*10);
             dateAttack = boardUser.receiveAttack(coordinateY, coordinateX);
-            flag = dateAttack.attack === true ||
-                   dateAttack.attack  === false ? 1 : 0;
+            flag = Number(typeof dateAttack.attacked === 'boolean');
         }
         return {
             coordinateX,

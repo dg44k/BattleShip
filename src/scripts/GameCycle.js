@@ -3,7 +3,7 @@ import Player from "./Player";
 import {generateBoard, showShips, getAttack, moveTurn} from "../DOM/dom";
 
 export function startGame(name) {
-    let boardBot = new GameBoard();
+    const boardBot = new GameBoard();
     const boardUser = new GameBoard();
 
     const user = new Player(name);
@@ -51,7 +51,7 @@ export function startGame(name) {
     });
 
     function checkEndGame(board, player) {
-        if (board.checkAllShips() === true) {
+        if (board.areAllShips()) {
             setTimeout(() => {
                 player.showWinUI();
             }, 500);

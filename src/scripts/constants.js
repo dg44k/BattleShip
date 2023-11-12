@@ -3,7 +3,7 @@ const MISS = "miss";
 const WRECKED_SHIP = "wrecked";
 const DESTROY_WHOLE = "destroy";
 const WHOLE_SHIP = "whole";
-const STOP_ZONE = 'stop';
+const STOP_ZONE = "stop";
 
 const LAST_NUMBER_BOARD = 9;
 const FIRST_NUMBER_BOARD = 0;
@@ -11,8 +11,8 @@ const FIRST_NUMBER_BOARD = 0;
 // This can be any number except 0 and 1, it is needed to determine the axis
 const NUMBER_DEFINE_AXIS = 4;
 
-const AXIS_X = 'X';
-const AXIS_Y = 'Y';
+const AXIS_X = "X";
+const AXIS_Y = "Y";
 
 const CONFIG_ARRAY_SHIPS = [
     {

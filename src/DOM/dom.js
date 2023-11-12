@@ -1,3 +1,5 @@
+import * as constants from "../scripts/constants";
+
 export function generateBoard(parentNode, board) {
   board.map((row, j) => {
     row.map((elem, i) => {
@@ -16,7 +18,7 @@ export function showShips(ships, allCells) {
   for (let i = 0; i < ships.length; i++) {
     [y, x] = ships[i].getPointStart();
 
-    if (ships[i].getAxis() === "Y") {
+    if (ships[i].getAxis() === constants.AXIS_Y) {
       for (let k = y; k <= ships[i].getPointEnd()[0]; k++) {
         findCell(k, x, allCells);
       }
@@ -44,12 +46,12 @@ export function getAttack (obj, allCells) {
     }
   });
 
-  if (obj.dateAttack.attack === true) {
+  if (obj.dateAttack.attacked === true) {
     targetCell.classList.remove('whole');
     targetCell.classList.add('wrecked');
 
-    if (obj.dateAttack.shipLife === true) {
-      if (obj.dateAttack.ship.getAxis() === "Y") {
+    if (obj.dateAttack.sunk === true) {
+      if (obj.dateAttack.ship.getAxis() === constants.AXIS_Y) {
         for (let i = obj.dateAttack.ship.getPointStart()[0]; i < obj.dateAttack.ship.getPointStart()[0] + obj.dateAttack.ship.getLengthShip(); i++) {
           allCells.forEach(item => {
             if (+item.dataset.idX === obj.dateAttack.ship.getPointStart()[1] && +item.dataset.idY === i) {

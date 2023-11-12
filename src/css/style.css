@@ -1,5 +1,6 @@
 @font-face {
-    font-family: Le_Murmure;
+    font-family: 'Le_Murmure';
+    src: url(../fonts/Le_Murmure-Regular_web.woff);
     src: url(../fonts/Le_Murmure-Regular_web.ttf);
     src: url(../fonts/le-murmure.otf);
 }
@@ -24,7 +25,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    font-family: Le_Murmure, serif;
+    font-family: 'Le_Murmure';
     height: 100%;
     background-color: var(--background-grid);
 }
@@ -49,7 +50,7 @@ body {
     border-radius: 8px;
     padding: 10px;
     font-size: 1.5rem;
-    font-family: Le_Murmure, serif;
+    font-family: 'Le_Murmure';
 
     animation: slade 2s forwards;
 }
@@ -96,7 +97,7 @@ body {
     border-radius: 8px;
     border: 1px solid #000;
     padding: 3px;
-    font-family: Le_Murmure, serif;
+    font-family: 'Le_Murmure';
 }
 
 .btn-primary, .btn-ok {
@@ -234,7 +235,7 @@ footer{
     scale: 1.2; 
 }
 
-@media (min-width: 200px) and (max-width: 500px){
+@media screen and (min-width: 200px) and (max-width: 500px){
     main {
         gap: 100px;
     }

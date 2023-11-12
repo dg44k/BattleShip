@@ -23,7 +23,3 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 });
 
-let img = new Image();
-img.src = PictureGitHub;
-img.classList.add('img_footer');
-document.querySelector('.link_footer').appendChild(img);

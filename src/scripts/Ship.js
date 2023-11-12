@@ -47,13 +47,13 @@ const Ship = function(length) {
         pointEnd = point;
     }
 
-    const hit = function() {
+    function hit() {
         countHit += 1;
         isSunk();
         return countHit;
     }
 
-    const isSunk = function () {
+    function isSunk() {
         return lifeShip = countHit === lengthShip;
     }
 
