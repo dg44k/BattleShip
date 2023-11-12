@@ -7,7 +7,7 @@ beforeAll(() => {
 
     obj = new GameBoard();
     board = obj.createBoard();
-    obj.arrangementShips()
+    obj.arrangeShips()
 });
 
 test('Проверка на наличие 100 клеток', () => {
