@@ -38,7 +38,6 @@ const GameBoard = function () {
             }
             
         });
-        console.log(ships);
     }
 
     const cycleArrangement = function (ship) {
